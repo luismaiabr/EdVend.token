@@ -1,4 +1,5 @@
 [tool.poetry]
+package-mode = false
 name = "edvend-token"
 version = "0.1.0"
 description = "Token obtainer for OAuth 2.0 for Kommo platform"
@@ -8,6 +9,7 @@ packages = [{include = "edvend"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+uvicorn = "^0.32.0"
 
 
 [build-system]
