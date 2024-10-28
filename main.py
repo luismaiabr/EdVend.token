@@ -16,7 +16,7 @@ async def oauth_callback(
             "status": "error",  
             "error": error  
         })  
-    
+    print(f"code: [{code}]")
     return JSONResponse({  
         "status": "success",  
         "code": code,  
