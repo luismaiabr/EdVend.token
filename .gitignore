@@ -1,5 +1,4 @@
+ssh_key_github
+ssh_key_github.pub
 cert.pem
-key
-key.pem
-key.pub
-ssh_connect.sh
+
