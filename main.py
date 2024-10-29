@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request  
+from fastapi import FastAPI  
 from fastapi.responses import JSONResponse  
 import uvicorn  
 
@@ -6,23 +6,24 @@ app = FastAPI()
 
 @app.get("/oauth/callback")  
 async def oauth_callback(  
+    client_id: str,  
+    client_secret: str,  
+    grant_type: str = 'authorization_code',  
     code: str | None = None,  
-    state: str | None = None,  
-    referer: str | None = None,  
-    client_id: str | None = None,error: str | None = None  
+    redirect_uri: str | None = None  
 ):  
-    if error:  
+    if not all([client_id, client_secret, code, redirect_uri]):  
         return JSONResponse({  
             "status": "error",  
-            "error": error  
+            "error": "Missing required parameters"  
         })  
-    print(f"code: [{code}]")
+    print(f'code: {code}')
     return JSONResponse({  
         "status": "success",  
+        "client_id": client_id,  
+        "grant_type": grant_type,  
         "code": code,  
-        "state": state,  
-        "referer": referer,  
-        "client_id": client_id  
+        "redirect_uri": redirect_uri  
     })  
 
 if __name__ == "__main__":  
@@ -33,4 +34,4 @@ if __name__ == "__main__":
         ssl_keyfile="key.pem",  
         ssl_certfile="cert.pem",  
         reload=True  
-    )  
+    )
